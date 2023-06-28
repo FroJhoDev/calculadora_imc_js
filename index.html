@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programe.io - Calculadora IMC JS</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        body {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(royalblue, blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5), 0px 0px 5px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+        .box h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input {
+            margin: 15px 0px;
+        }
+        .input label {
+            font-weight: bold;
+        }
+        .input input {
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            margin-top: 10px;
+            color: #333333;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: #f1f1f1;
+            font-size: 16px;
+        }
+        button {
+            border: 1px solid #dddddd;
+            width: 100%;
+            height: 40px;
+            background-color: orange;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        button:hover {
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        #imc-value {
+            background-color: royalblue;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 10px 0;
+            color: #ffffff;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="box">
+        <h1>Calculadora IMC</h1>
+        <div class="input">
+            <label for="height">Altura (m)</label>
+            <input type="number" id="height" placeholder="Ex: 1.5">
+        </div>
+        <div class="input">
+            <label for="weight">Peso (kg)</label>
+            <input type="number" id="weight" placeholder="Ex: 50">
+        </div>
+        <button id="calculate">
+            Calcular IMC
+        </button>
+        <p>Seu IMC</p>
+        <div id="imc-value">00.00</div>
+        <p id="result">Resultado</p>
+    </section>
+    
+    <script>
+
+        const altura = document.getElementById('height'); // Pega um referencia ao elemento no HTML atraves do ID
+        const peso = document.getElementById('weight');
+        const botao = document.getElementById('calculate');
+        const valorImc = document.getElementById('imc-value');
+        const resultado = document.getElementById('result');
+
+        // 'Esculta' quando acontece um evento de click 
+        // no botão de Calcular IMC
+        botao.addEventListener('click', () => {
+            
+            // Pega o valor dos inputs usando '.value' e faz o calculo o imc
+            var imc = peso.value / (altura.value * altura.value);
+
+            // Atraves da referencia do elemento, muda o contedo de dentro da tag com a função '.textContent'
+            // .toFixed(2) é usado para pegar apenas duas casa decimais depois do ponto
+            valorImc.textContent = imc.toFixed(2);
+
+            if (imc < 18.5) {
+
+                resultado.textContent = 'Abaixo do Peso';
+
+            } else if (imc >= 18.5 && imc <= 24.9) {
+
+                resultado.textContent = 'Peso Normal';
+
+            } else if (imc >= 25 && imc <= 29.9) {
+
+                resultado.textContent = 'Sobrepeso';
+
+            } else if (imc >= 30 && imc <= 34.9) {
+
+                resultado.textContent = 'Obesidade Grau I';
+
+            } else if (imc >= 35 && imc <= 39.9) {
+
+                resultado.textContent = 'Obesidade Grau II';
+
+            } else {
+
+                resultado.textContent = 'Obesidade Morbida'
+
+            }
+            
+        });
+
+    </script>
+</body>
+</html>
